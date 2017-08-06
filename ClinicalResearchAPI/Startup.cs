@@ -41,7 +41,7 @@ namespace ClinicalResearchAPI
             {
                 Authority = "http://localhost:5000",
                 RequireHttpsMetadata = false,
-
+                
                 ApiName = "clinical_research_api"
             });
             app.UseMvc();

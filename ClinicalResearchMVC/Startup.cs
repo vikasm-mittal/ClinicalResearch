@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ClinicalResearchMVC
 {
@@ -34,6 +35,8 @@ namespace ClinicalResearchMVC
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -47,8 +50,25 @@ namespace ClinicalResearchMVC
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseStaticFiles();
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies"                
+            });
 
+            app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
+            {
+                AuthenticationScheme = "oidc",
+                SignInScheme = "Cookies",                
+
+                Authority = "http://localhost:5000",
+                
+                RequireHttpsMetadata = false,                
+
+                ClientId = "clinical-research-mvc-client",
+                SaveTokens = true
+            });
+
+            app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
