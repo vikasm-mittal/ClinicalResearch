@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ClinicalResearchAPI.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClinicalResearchAPI
 {
@@ -27,6 +29,9 @@ namespace ClinicalResearchAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PatientContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("PatientContext")));
+
             services.AddMvcCore()
                 .AddAuthorization()
                 .AddJsonFormatters();
@@ -40,7 +45,7 @@ namespace ClinicalResearchAPI
 
             app.UseIdentityServerAuthentication(new IdentityServerAuthenticationOptions
             {
-                Authority = "http://localhost:5000",
+                Authority = "http://localhost:5003",
                 RequireHttpsMetadata = false,
                 
                 ApiName = "clinical_research_api"

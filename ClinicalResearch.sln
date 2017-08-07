@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicalResearchAPI", "Clin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerSelfHost", "IdentityServerSelfHost\IdentityServerSelfHost.csproj", "{C6E7700E-2BCC-4A65-A779-60C5E79AED0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServerDB", "IdentityServerDB\IdentityServerDB.csproj", "{C1EFDC78-6E33-4897-A2FD-2B51B6C5A581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServerDB", "IdentityServerDB\IdentityServerDB.csproj", "{C1EFDC78-6E33-4897-A2FD-2B51B6C5A581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{9BC8DE0F-6BAF-417A-9B55-2D86DD3796F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{C1EFDC78-6E33-4897-A2FD-2B51B6C5A581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1EFDC78-6E33-4897-A2FD-2B51B6C5A581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1EFDC78-6E33-4897-A2FD-2B51B6C5A581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BC8DE0F-6BAF-417A-9B55-2D86DD3796F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BC8DE0F-6BAF-417A-9B55-2D86DD3796F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BC8DE0F-6BAF-417A-9B55-2D86DD3796F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BC8DE0F-6BAF-417A-9B55-2D86DD3796F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
