@@ -35,7 +35,12 @@ namespace IdentityServerDB
                 new Client
                 {
                     ClientId = "clinical-research-mvc-client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    ClientName = "MVC Client",
+                    ClientSecrets =
+                    {
+                        new Secret("mvc".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
                     RedirectUris = { "http://localhost:5002/signin-oidc" },
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
@@ -46,7 +51,9 @@ namespace IdentityServerDB
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile
                     },
-                    RequireConsent = false                    
+                    RequireConsent = false,
+                    AllowOfflineAccess = true
+                    
                 }
             };
         }

@@ -14,10 +14,9 @@ namespace IdentityServerDB
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseUrls("http://localhost:5000")
+                .UseUrls("http://localhost:5003")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .Build();
 
             host.Run();

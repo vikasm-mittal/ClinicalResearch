@@ -43,7 +43,6 @@ namespace ClinicalResearchMVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
             }
             else
             {
@@ -58,13 +57,18 @@ namespace ClinicalResearchMVC
             app.UseOpenIdConnectAuthentication(new OpenIdConnectOptions
             {
                 AuthenticationScheme = "oidc",
-                SignInScheme = "Cookies",                
+                SignInScheme = "Cookies",
+                ResponseType = "code id_token",
 
-                Authority = "http://localhost:5000",
-                
-                RequireHttpsMetadata = false,                
+                Authority = "http://localhost:5003",
+
+                RequireHttpsMetadata = false,
 
                 ClientId = "clinical-research-mvc-client",
+                Scope = { "clinical_research_api", "offline_access" },
+
+                GetClaimsFromUserInfoEndpoint = true,
+                ClientSecret = "mvc",
                 SaveTokens = true
             });
 
