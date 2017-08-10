@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using IdentityModel;
 
 namespace ClinicalResearchMVC
 {
@@ -30,6 +32,11 @@ namespace ClinicalResearchMVC
         {
             // Add framework services.
             services.AddMvc();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Doctor", policy => policy.RequireRole("Doctor"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,11 +72,18 @@ namespace ClinicalResearchMVC
                 RequireHttpsMetadata = false,
 
                 ClientId = "clinical-research-mvc-client",
-                Scope = { "clinical_research_api", "offline_access" },
-
-                GetClaimsFromUserInfoEndpoint = true,
+                Scope = { "clinical_research_api", "offline_access", "role" },
+                
+                //GetClaimsFromUserInfoEndpoint = true,
                 ClientSecret = "mvc",
-                SaveTokens = true
+                SaveTokens = true,
+                
+
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    NameClaimType = "name",
+                    RoleClaimType = "role",
+                }
             });
 
             app.UseStaticFiles();

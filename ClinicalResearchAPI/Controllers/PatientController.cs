@@ -12,7 +12,7 @@ namespace ClinicalResearchAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/Patient")]
-    [Authorize]
+    //[Authorize]
     public class PatientController : Controller
     {
         private PatientContext _patientContext;
@@ -29,12 +29,13 @@ namespace ClinicalResearchAPI.Controllers
             return _patientContext.Patients.ToList();
         }
 
-        // GET: api/Patient/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/patient/doctor/3 -- get all patients for doctor with id 3
+        [HttpGet("doctor/{id}")]
+        public string GetByDoctor(int id)
         {
+            
             return "value";
-        }
+        }       
         
         // POST: api/Patient
         [HttpPost]

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Models.Models;
 using Microsoft.AspNetCore.Authorization;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ClinicalResearchAPI.Controllers
 {
-    //[Authorize]
-    [Route("api/[controller]")]
-    public class ValuesController : ControllerBase
+    [Authorize]
+    [Route("api/StudyResult")]
+    public class StudyResultController : Controller
     {
-        // GET api/values
+        // GET: api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -25,9 +28,9 @@ namespace ClinicalResearchAPI.Controllers
             return "value";
         }
 
-        // POST api/values
+        // POST api/StudyResult
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]StudyResult value)
         {
         }
 

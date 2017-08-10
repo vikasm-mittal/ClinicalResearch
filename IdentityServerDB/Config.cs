@@ -1,4 +1,5 @@
-﻿using IdentityServer4;
+﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace IdentityServerDB
         {
             return new List<ApiResource>
             {
-                new ApiResource("clinical_research_api", "Clinical Research API")
+                new ApiResource("clinical_research_api", "Clinical Research API", new List<string>(){ JwtClaimTypes.Role })
             };
         }
                 
@@ -49,11 +50,14 @@ namespace IdentityServerDB
                     {
                         "clinical_research_api",
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "role"
+                        
                     },
                     RequireConsent = false,
-                    AllowOfflineAccess = true
-                    
+                    AllowOfflineAccess = true,
+                    AlwaysIncludeUserClaimsInIdToken = true,
+                    AlwaysSendClientClaims = true,
                 }
             };
         }
@@ -91,10 +95,16 @@ namespace IdentityServerDB
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
+            var customProfile = new IdentityResource(
+                name: "custom.profile",
+                displayName: "Custom profile",
+                claimTypes: new[] { "role" });
+
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                customProfile
             };
         }
     }
